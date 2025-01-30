@@ -1,6 +1,7 @@
-# SecondTestMogitate(確認テスト_もぎたて)
+# SecondTestMogitate(確認テスト\_もぎたて)
 
 ## 環境構築
+
 以下の手順に従って、開発環境をセットアップしてください。
 
 1. **リポジトリのクローン**
@@ -10,15 +11,15 @@
     cd SecondTestMogitate
     ```
 
-2. **Dockerコンテナのビルドと起動**
+2. **Docker コンテナのビルドと起動**
 
-    Dockerがインストールされていることを確認してください。
+    Docker がインストールされていることを確認してください。
 
     ```bash
     docker-compose up -d --build
     ```
 
-3. **Composerのインストール**
+3. **Composer のインストール**
 
     ```bash
     docker-compose exec app composer install
@@ -54,16 +55,17 @@
 
 ## 使用技術(実行環境)
 
-- **言語**: PHP 8.x
-- **フレームワーク**: Laravel 9.x
-- **データベース**: MySQL
-- **コンテナ化**: Docker, Docker Compose
-- **フロントエンド**: Bladeテンプレート, CSS
-mysql:
+-   **言語**: PHP 8.x
+-   **フレームワーク**: Laravel 9.x
+-   **データベース**: MySQL
+-   **コンテナ化**: Docker, Docker Compose
+-   **フロントエンド**: Blade テンプレート, CSS
+    mysql:
     platform: linux/x86_64(この文追加)
     image: mysql:8.0.26
     environment:
-```
+
+````
 
 **Laravel環境構築**
 1. `docker-compose exec php bash`
@@ -77,34 +79,38 @@ DB_PORT=3306
 DB_DATABASE=laravel_db
 DB_USERNAME=laravel_user
 DB_PASSWORD=laravel_pass
-```
+````
+
 5. アプリケーションキーの作成
-``` bash
+
+```bash
 php artisan key:generate
 ```
 
 6. マイグレーションの実行
-``` bash
+
+```bash
 php artisan migrate
 ```
 
 7. シーディングの実行
-``` bash
+
+```bash
 php artisan db:seed
 ```
 
 ## 使用技術(実行環境)
 
-- **言語**: PHP 8.x
-- **フレームワーク**: Laravel 9.x
-- **データベース**: MySQL
-- **コンテナ化**: Docker, Docker Compose
-- **フロントエンド**: Bladeテンプレート, CSS
+-   **言語**: PHP 8.x
+-   **フレームワーク**: Laravel 9.x
+-   **データベース**: MySQL
+-   **コンテナ化**: Docker, Docker Compose
+-   **フロントエンド**: Blade テンプレート, CSS
 
-## ER図
+## ER 図
 
-![ER図](resource/doc/er-diagram.png)
+![ER図](src/resources/doc/er-diagram.png)
 
 ## URL
 
-- **開発環境**: [http://localhost:8000](http://localhost:8000)
+-   **開発環境**: [http://localhost:8000](http://localhost:8000)
