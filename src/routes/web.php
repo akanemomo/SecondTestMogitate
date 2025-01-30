@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// ホームページを商品一覧画面に設定
+Route::get('/', [ProductController::class, 'index'])->name('products.index');
+
+// 商品のリソースルート（indexは既に設定済みのため除外）
+Route::resource('products', ProductController::class)->except(['index']);

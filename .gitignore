@@ -1,2 +1,15 @@
+# MySQLデータの除外
 docker/mysql/data/*
 !.gitkeep
+
+# Laravel環境で追加すべき設定
+/vendor/
+node_modules/
+.env
+.env.local
+.env.*.local
+storage/
+bootstrap/cache/
+public/storage/  # Laravelのシンボリックリンク用のストレージ
+.idea/
+.vscode/
