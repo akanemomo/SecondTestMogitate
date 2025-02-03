@@ -12,12 +12,16 @@
             color: gray;
         }
     </style>
+    <link rel="stylesheet" href="{{ asset('css/products.css') }}">  {{-- ここを変更 --}}
+    @yield('css')  {{-- 各ページごとのCSSを追加できる --}}
 </head>
 <body>
     <!-- ナビゲーションバー -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #F5C800; padding: 15px;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ route('products.index') }}">SecondTestMogitate</a>
+            <a class="navbar-brand" href="{{ route('products.index') }}" style="font-family: 'jsMath-cmti10'; font-size: 30px; font-style: italic; font-weight: 500; color: #333;">
+                mogitate
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -25,13 +29,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('products.index') }}">ホーム</a>
+                        <a class="nav-link" href="{{ route('products.index') }}" style="color: #333; font-weight: 500;">ホーム</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('products.index') }}">商品一覧</a>
+                        <a class="nav-link" href="{{ route('products.index') }}" style="color: #333; font-weight: 500;">商品一覧</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('contact') }}">お問い合わせ</a>
+                        <a class="nav-link" href="{{ route('contact') }}" style="color: #333; font-weight: 500;">お問い合わせ</a>
                     </li>
                 </ul>
             </div>
@@ -44,8 +48,8 @@
     </div>
 
     <!-- フッター -->
-    <footer class="bg-light text-center text-lg-start mt-5">
-        <div class="text-center p-3">
+    <footer class="bg-light text-center text-lg-start mt-5" style="padding: 15px;">
+        <div class="text-center p-3" style="color: #333; font-weight: 500;">
             © {{ date('Y') }} SecondTestMogitate. All rights reserved.
         </div>
     </footer>

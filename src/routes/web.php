@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,5 +17,13 @@ use App\Http\Controllers\ProductController;
 // ホームページを商品一覧画面に設定
 Route::get('/', [ProductController::class, 'index'])->name('products.index');
 
-// 商品のリソースルート（indexは既に設定済みのため除外）
-Route::resource('products', ProductController::class)->except(['index']);
+// 商品一覧ページのルート
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+
+// 商品のリソースルートをフルセットで定義（index も含む）
+Route::resource('products', ProductController::class);
+
+// お問い合わせページのルート
+Route::get('/contact', function () {
+    return view('contact'); // 必要なら変更
+})->name('contact');

@@ -1,0 +1,110 @@
+.product-detail {
+    padding: 20px;
+}
+
+.detail-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 画像と情報エリアを横並び */
+.image-info-wrapper {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+/* 画像エリア */
+.image-container {
+    width: 400px;
+    flex-shrink: 0;
+}
+
+.product-image {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.file-input {
+    display: block;
+    margin-top: 10px;
+}
+
+.no-image-text {
+    font-size: 14px;
+    color: gray;
+}
+
+/* 商品情報エリア */
+.info-container {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.input-field,
+.textarea-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #E0DFDE;
+    border-radius: 5px;
+}
+
+/* 季節チェックボックスを横並びにする */
+.season-checkboxes {
+    display: flex;
+    gap: 10px;
+}
+
+.season-checkboxes label {
+    background-color: #eee;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* エラーメッセージ */
+.error-text {
+    color: red;
+    font-size: 12px;
+}
+
+/* ボタンの配置 */
+.button-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-secondary {
+    background: #ccc;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.btn-warning {
+    background: #FFC107;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+/* 削除ボタン */
+.delete-form {
+    margin-top: 20px;
+}
+
+.delete-button {
+    background: #FD0707;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}

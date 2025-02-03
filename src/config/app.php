@@ -69,6 +69,9 @@ return [
 
     'timezone' => 'Asia/Tokyo',
 
+    // ページネーションの設定を追加
+    'pagination' => 'bootstrap-4',
+
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
