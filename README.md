@@ -46,37 +46,87 @@ DB_USERNAME=laravel_user
 DB_PASSWORD=laravel_pass
 ```
 
-### 6. アプリケーションキーの生成
+🚨 重要：作成した .env をコンテナにコピー
+
+```bash
+docker cp .env secondtestmogitate-php-1:/var/www/.env
+```
+
+### 6. ストレージとキャッシュディレクトリの権限設定
+
+```bash
+docker-compose exec app chmod -R 775 storage bootstrap/cache
+docker-compose exec app chown -R www-data:www-data storage bootstrap/cache
+```
+
+### 7. 設定ファイルのキャッシュクリア
+
+```bash
+docker-compose exec app php artisan config:clear
+docker-compose exec app php artisan cache:clear
+docker-compose exec app php artisan config:cache
+```
+
+### 8. アプリケーションキーの生成
 
 ```bash
 docker-compose exec app php artisan key:generate
 ```
 
-### 7. マイグレーションの実行
+### 9. マイグレーションの実行
 
 ```bash
 docker-compose exec app php artisan migrate
 ```
 
-### 8. シーディング（ダミーデータ投入）
+### 10. シーディング（ダミーデータ投入）
 
 ```bash
 docker-compose exec app php artisan db:seed
 ```
 
-## 環境構築の際に実行した追加コマンド
+### 11. 画像の表示設定
 
-クローンしたリポジトリの環境構築確認時に、以下のコマンドを実行しました：
+商品画像を正しく表示するために、シンボリックリンクを作成します。
 
-````bash
-docker-compose exec php php artisan config:clear
-docker-compose exec php php artisan cache:clear
-docker-compose exec php php artisan migrate:fresh --seed
+```bash
+docker-compose exec app php artisan storage:link
+```
 
-また、storageディレクトリとbootstrap/cacheディレクトリに適切な権限を付与するために以下のコマンドを実行しました：
+## 商品登録機能
 
-docker-compose exec php chmod -R 775 storage bootstrap/cache
-docker-compose exec php chown -R www-data:www-data storage bootstrap/cache
+- 商品名、価格、画像、季節（複数選択可）、説明を登録可能
+- 画像は `storage/app/public/fruits-img/` に保存
+- 季節は `seasons` テーブルにリレーションとして保存
+- 登録後は `/products` にリダイレクト
+
+## エラー対応
+
+クローン後に以下のエラーが発生した場合の対処法を記載します。
+
+❌ Please provide a valid cache path. エラー
+
+原因: storage/framework/cache ディレクトリが作成されていない、または権限不足のため発生
+
+解決策:
+
+```bash
+docker-compose exec app mkdir -p storage/framework/cache/data
+docker-compose exec app chmod -R 775 storage bootstrap/cache
+docker-compose exec app chown -R www-data:www-data storage bootstrap/cache
+docker-compose exec app php artisan config:clear
+docker-compose exec app php artisan cache:clear
+docker-compose exec app php artisan config:cache
+docker-compose exec app php artisan key:generate
+```
+
+コンテナを再起動した後に .env が消えた場合
+
+```bash
+docker cp .env secondtestmogitate-php-1:/var/www/.env
+```
+
+→ .env を再度コピーし、config:clear などを実行し直す。
 
 ## 使用技術(実行環境)
 
@@ -87,6 +137,7 @@ docker-compose exec php chown -R www-data:www-data storage bootstrap/cache
 - **フロントエンド**: Blade テンプレート, CSS
 
 ## MySQL 設定 (docker-compose.yml)
+
 ```yaml
 mysql:
   platform: linux/x86_64
@@ -96,11 +147,11 @@ mysql:
     MYSQL_DATABASE: laravel_db
     MYSQL_USER: laravel_user
     MYSQL_PASSWORD: laravel_pass
-````
+```
 
 ## ER 図
 
-![ER図](src/resources/doc/er-diagram.png)
+![ER図](./src/resources/doc/er-diagram.png)
 
 ## URL
 
