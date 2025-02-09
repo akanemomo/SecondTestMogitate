@@ -15,12 +15,12 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'price' => 'required|integer|min:0|max:10000',
+            'price' => 'required|integer|min:0',
             'image' => 'nullable|image|mimes:jpeg,png|max:2048',
             'description' => 'required|string|max:120',
-            'seasons' => 'required|array',
-            'seasons.*' => 'exists:seasons,id',
-        ];
+            'seasons' => 'nullable|array', // ← 季節を一時的に任意にする
+            'seasons.*' => 'string', // ← 配列の中の値も文字列ならOKにする
+    ];
     }
 
     public function messages()

@@ -1,10 +1,15 @@
 @extends('layouts.app')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/create.css') }}"> {{-- create.css に変更 --}}
+    <link rel="stylesheet" href="{{ asset('css/create.css') }}">
 @endsection
 
 @section('content')
+@php
+    // old() のデフォルト値を空配列にすることで、エラー防止
+    $oldSeasons = old('season', []);
+@endphp
+
 <div class="container">
     <h2 class="title">商品登録</h2>
 
@@ -35,10 +40,13 @@
         <!-- 季節（複数選択可） -->
         <label>季節 <span class="required">必須</span> <span class="note">複数選択可</span></label>
         <div class="checkbox-group">
-            <label><input type="checkbox" name="season[]" value="春"> 春</label>
-            <label><input type="checkbox" name="season[]" value="夏"> 夏</label>
-            <label><input type="checkbox" name="season[]" value="秋"> 秋</label>
-            <label><input type="checkbox" name="season[]" value="冬"> 冬</label>
+            @foreach (['春', '夏', '秋', '冬'] as $season)
+                <label>
+                    <input type="checkbox" name="season[]" value="{{ $season }}"
+                        {{ in_array($season, $oldSeasons) ? 'checked' : '' }}>
+                    {{ $season }}
+                </label>
+            @endforeach
         </div>
         @error('season')
             <p class="error">{{ $message }}</p>

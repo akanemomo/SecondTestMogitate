@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Season;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str; // 追加
 
 class ProductController extends Controller
 {
@@ -43,8 +44,9 @@ class ProductController extends Controller
     {
         $imagePath = null;
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('fruits-img', 'public');
-            $imagePath = 'fruits-img/' . basename($path);
+            $filename = time() . '_' . Str::random(10) . '.' . $request->file('image')->getClientOriginalExtension();
+            $path = $request->file('image')->storeAs('fruits-img', $filename, 'public');
+            $imagePath = 'fruits-img/' . $filename;
         }
 
         try {
@@ -55,11 +57,11 @@ class ProductController extends Controller
                 'description' => $request->description,
             ]);
 
-            if ($request->has('seasons')) {
-                $product->seasons()->attach($request->seasons);
-            }
+        if ($request->has('seasons')) {
+            $product->seasons()->attach($request->seasons);
+        }
 
-            return redirect('/products')->with('success', '商品が追加されました！');
+        return redirect('/products')->with('success', '商品が追加されました！');
         } catch (\Exception $e) {
             return redirect('/products')->with('error', '商品登録に失敗しました。エラー: ' . $e->getMessage());
         }
@@ -96,8 +98,9 @@ class ProductController extends Controller
                 if ($product->image) {
                     Storage::disk('public')->delete($product->image);
                 }
-                $path = $request->file('image')->store('fruits-img', 'public');
-                $imagePath = 'fruits-img/' . basename($path);
+                $filename = time() . '_' . Str::random(10) . '.' . $request->file('image')->getClientOriginalExtension();
+                $path = $request->file('image')->storeAs('fruits-img', $filename, 'public');
+                $imagePath = 'fruits-img/' . $filename;
             } else {
                 $imagePath = $product->image; // 画像が変更されていなければ元の画像を保持
             }
@@ -144,4 +147,3 @@ class ProductController extends Controller
         }
     }
 }
-
